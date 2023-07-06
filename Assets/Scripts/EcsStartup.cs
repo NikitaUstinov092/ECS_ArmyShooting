@@ -16,7 +16,8 @@ namespace Client {
             _systems = new EcsSystems (_world);
             _systems
                 // register your systems here, for example:
-                 .Add (new FighterInitialazer ())
+                 .Add (new ECSInitialazer ())
+                 .Add (new SpawnFighter())
                 // .Add (new TestSystem2 ())
                 
                 // register additional worlds here, for example:

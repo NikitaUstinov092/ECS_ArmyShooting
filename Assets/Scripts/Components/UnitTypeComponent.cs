@@ -1,6 +1,6 @@
 using UnityEngine;
 
-    struct BlockViewComponent
+    struct UnitTypeComponent
     {
         public GameObject View;
     }

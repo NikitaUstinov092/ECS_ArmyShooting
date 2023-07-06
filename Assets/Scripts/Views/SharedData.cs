@@ -6,7 +6,10 @@ public class SharedData
 {
     public int CountSpawnInRow;
     public int Row;
+
     public GameObject RedFighter;
     public GameObject BlueFighter;
 
+    public Transform RedTeamStartpoint;
+    public Transform BlueTeamStartpoint;
 }

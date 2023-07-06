@@ -2,13 +2,15 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
 namespace Client {
-    public struct FighterInitialazer : IEcsInitSystem 
+    public struct ECSInitialazer : IEcsInitSystem 
     {
         private readonly EcsCustomInject<SharedData> _data;
+
         public void Init (IEcsSystems systems) 
         {
             var world = systems.GetWorld();
-            EcsPool<BlockViewComponent> poolBlock = world.GetPool<BlockViewComponent>();
+
+            EcsPool<UnitTypeComponent> poolBlock = world.GetPool<UnitTypeComponent>();
             EcsPool<HealthComponent> poolHealth = world.GetPool<HealthComponent>();
             EcsPool<DamageComponent> poolDamage = world.GetPool<DamageComponent>();
 
