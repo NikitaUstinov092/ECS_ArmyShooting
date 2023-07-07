@@ -2,6 +2,6 @@ using UnityEngine;
 
 public struct MoveComponent 
 {
-    public Transform TransformComp;
+    public Transform TargteTranform;
     public float Speed;
 }

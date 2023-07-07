@@ -6,15 +6,24 @@ using UnityEngine;
 struct SpawnFighter : IEcsInitSystem
 {
     private readonly EcsCustomInject<SharedData> _data;
-    private readonly EcsFilterInject<Inc<UnitTypeComponent>> ecsUnitFilter;
+    private readonly EcsFilterInject<Inc<UnitTypeComponent, ArmyComponent>> ecsFilter;
     public void Init(IEcsSystems systems)
     {
-        var Team = InstatiateTeam("Blue Team", _data.Value.BlueFighter, _data.Value.BlueTeamStartpoint.position);
-      
-        for (var i = 0; i < Team.Count; i++)
-            ecsUnitFilter.Pools.Inc1.Get(i).View = Team[i];
-    }
+        var BlueTeam = InstatiateTeam("Blue Team", _data.Value.BlueFighter, _data.Value.BlueTeamStartpoint.position);
+        var RedTeam = InstatiateTeam("Red Team", _data.Value.RedFighter, _data.Value.RedTeamStartpoint.position);
 
+        foreach (var entityIndex in ecsFilter.Value)
+        {
+            ref var unitTypeComponent = ref ecsFilter.Pools.Inc1.Get(entityIndex);
+            ref var armyComponent = ref ecsFilter.Pools.Inc2.Get(entityIndex);
+
+            if (armyComponent.TeamNumber == 0)                 
+                unitTypeComponent.View = GetFighter(BlueTeam);
+            
+            else if (armyComponent.TeamNumber == 1)      
+                unitTypeComponent.View = GetFighter(RedTeam);            
+        }
+    }
 
     private List<GameObject> InstatiateTeam(string teamName, GameObject prefab, Vector3 spawnPosition)
     {
@@ -38,5 +47,13 @@ struct SpawnFighter : IEcsInitSystem
 
         return massTeam;
     }
-  
+    private GameObject GetFighter(List<GameObject> list)
+    {
+        if (list.Count <= 0)
+            return null;
+
+        var fighter = list[0];
+        list.RemoveAt(0);
+        return fighter;
+    }
 }

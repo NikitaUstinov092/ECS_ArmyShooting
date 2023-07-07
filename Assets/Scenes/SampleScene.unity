@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238504858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.0718944, y: -0, z: 25.21}
+  m_LocalPosition: {x: -2.0718944, y: -0, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -178,7 +178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504743591}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.0718944, y: 0, z: -19.2}
+  m_LocalPosition: {x: -2.0718944, y: 0, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -453,14 +453,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.0020097403, y: 0.96038955, z: -0.27856803, w: -0.006912596}
-  m_LocalPosition: {x: 3.1, y: 25.9, z: 51.4}
+  m_LocalRotation: {x: 0.0029707022, y: -0.9113797, z: 0.4115036, w: 0.0065652337}
+  m_LocalPosition: {x: 3.1, y: 59.92, z: 90.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 48.6, y: -179.175, z: -0.001}
 --- !u!1 &1547043278
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,11 +491,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    CountSpawnInRow: 5
-    Row: 5
+    CountSpawnInRow: 10
+    Row: 10
     RedFighter: {fileID: 3899034627970750212, guid: 6bad952d8a4bf334c9006c8316e62d4c, type: 3}
     BlueFighter: {fileID: 4757280415597163549, guid: 63ea1e1cdab886b489a14bb8da4b964d, type: 3}
-    RedTeamStartpoint: {fileID: 238504859}
+    RedTeamStartpoint: {fileID: 504743592}
     BlueTeamStartpoint: {fileID: 238504859}
 --- !u!4 &1547043280
 Transform:

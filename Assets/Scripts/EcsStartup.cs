@@ -18,6 +18,7 @@ namespace Client {
                 // register your systems here, for example:
                  .Add (new ECSInitialazer ())
                  .Add (new SpawnFighter())
+                 .Add (new MoveSystem())
                 // .Add (new TestSystem2 ())
                 
                 // register additional worlds here, for example:
