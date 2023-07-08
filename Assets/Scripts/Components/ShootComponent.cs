@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public struct ShootComponent 
 {
-    public float Damage;
+    public Transform Spawn;
+    public const float Damage = 100;
     public string TargetTag;
+    public GameObject Bullet;
+
 }

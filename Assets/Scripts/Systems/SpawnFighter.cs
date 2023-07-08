@@ -9,8 +9,8 @@ struct SpawnFighter : IEcsInitSystem
     private readonly EcsFilterInject<Inc<UnitTypeComponent, ArmyComponent>> ecsFilter;
     public void Init(IEcsSystems systems)
     {
-        var BlueTeam = InstatiateTeam("Blue Team", _data.Value.BlueFighter, _data.Value.BlueTeamStartpoint.position);
-        var RedTeam = InstatiateTeam("Red Team", _data.Value.RedFighter, _data.Value.RedTeamStartpoint.position);
+        var BlueTeam = InstatiateTeam("Blue Team", _data.Value.BlueFighter, _data.Value.BlueTeamStartPoint.position);
+        var RedTeam = InstatiateTeam("Red Team", _data.Value.RedFighter, _data.Value.RedTeamStartPoint.position);
 
         foreach (var entityIndex in ecsFilter.Value)
         {
@@ -41,6 +41,9 @@ struct SpawnFighter : IEcsInitSystem
                 // Создаем объект на заданной позиции
                 GameObject newFighter = Object.Instantiate(prefab, spawnPosition + offset, Quaternion.identity);
                 newFighter.transform.parent = parent.transform;
+                
+                newFighter.tag = teamName;
+
                 massTeam.Add(newFighter);
             }
         }

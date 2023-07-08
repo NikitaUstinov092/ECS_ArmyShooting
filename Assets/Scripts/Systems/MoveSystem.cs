@@ -3,7 +3,7 @@ using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 namespace Client {
-    sealed class MoveSystem : IEcsInitSystem, IEcsRunSystem
+    struct MoveSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<ArmyComponent, MoveComponent, UnitTypeComponent>> ecsFilter;
         private readonly EcsCustomInject<SharedData> _data;
@@ -19,10 +19,10 @@ namespace Client {
                 ref var moveComponent = ref ecsFilter.Pools.Inc2.Get(entityIndex);
 
                 if (armyComponent.TeamNumber == 0)          
-                    moveComponent.TargteTranform = _data.Value.RedTeamStartpoint;
+                    moveComponent.TargteTranform = _data.Value.RedTeamStartPoint;
      
                 else if (armyComponent.TeamNumber == 1)
-                    moveComponent.TargteTranform = _data.Value.BlueTeamStartpoint;
+                    moveComponent.TargteTranform = _data.Value.BlueTeamStartPoint;
                
                 moveComponent.Speed = GetRandomSpeed();
             }

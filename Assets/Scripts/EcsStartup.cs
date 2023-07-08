@@ -19,8 +19,9 @@ namespace Client {
                  .Add (new ECSInitialazer ())
                  .Add (new SpawnFighter())
                  .Add (new MoveSystem())
+                  .Add(new ShootSystem())
                 // .Add (new TestSystem2 ())
-                
+
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")
 #if UNITY_EDITOR
