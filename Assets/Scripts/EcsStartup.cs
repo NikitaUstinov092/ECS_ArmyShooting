@@ -19,7 +19,8 @@ namespace Client {
                  .Add (new ECSInitialazer ())
                  .Add (new SpawnFighter())
                  .Add (new MoveSystem())
-                  .Add(new ShootSystem())
+                 .Add(new ShootInitSystem())
+                  .Add(new ShootRunSystem())
                 // .Add (new TestSystem2 ())
 
                 // register additional worlds here, for example:
