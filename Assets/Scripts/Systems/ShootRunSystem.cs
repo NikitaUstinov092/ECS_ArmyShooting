@@ -1,40 +1,53 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Client {
     struct ShootRunSystem : IEcsRunSystem {
 
-        private readonly EcsFilterInject<Inc<ShootComponent>> ecsFilterShoot; // Добавленный фильтр
+        private const float distanceShoot = 50;
 
-        private float spawnDelay; // Задержка в секундах между спавнами.
-        private float spawnTimer; // Таймер для отслеживания времени.
+        private readonly EcsFilterInject<Inc<ShootComponent, ArmyComponent, UnitTypeComponent>> ecsFilterS;
         public void Run(IEcsSystems systems)
         {
-            spawnTimer += Time.deltaTime;
+            var world = systems.GetWorld();
 
-            if (spawnTimer >= GetRandomTime())
+            foreach (var entityIndex in ecsFilterS.Value)
             {
-                spawnTimer = 0f;
+                ref var shootComponent = ref ecsFilterS.Pools.Inc1.Get(entityIndex);
+                ref var armyTypeComponent = ref ecsFilterS.Pools.Inc2.Get(entityIndex);
+                ref var unitTypeComponent = ref ecsFilterS.Pools.Inc3.Get(entityIndex);
 
-                for (int i = ecsFilterShoot.Value.GetEntitiesCount(); i < ecsFilterShoot.Value.GetEntitiesCount() * 2; i++)
-                {
-                    if (ecsFilterShoot.Pools.Inc1.Has(i))
-                    {
-                        ref var shootComponent = ref ecsFilterShoot.Pools.Inc1.Get(i);
-                        GameObject newFighter = Object.Instantiate(shootComponent.Bullet, shootComponent.Spawn.position, shootComponent.Bullet.transform.rotation);
-                        Rigidbody rb = newFighter.GetComponent<Rigidbody>();
-                        rb.AddForce(-shootComponent.Spawn.forward * 300);
-
-                    }
-                }
+                if (CheckShootDistance(ref armyTypeComponent, ref unitTypeComponent))
+                    StartShooting(ref shootComponent, 5);
             }
         }
 
-
-        private float GetRandomTime()
+        private bool CheckShootDistance(ref ArmyComponent currentFighter, ref UnitTypeComponent currentUnit)
         {
-            return Random.Range(1, 5);
+            var currentFighterTeam = currentFighter.TeamNumber;
+            var currentFighterUnit = currentUnit.View;
+
+            foreach (var entityIndex in ecsFilterS.Value)
+            {
+                ref var armyTypeComponent = ref ecsFilterS.Pools.Inc2.Get(entityIndex);
+                ref var unitTypeComponent = ref ecsFilterS.Pools.Inc3.Get(entityIndex);
+
+                if (armyTypeComponent.TeamNumber != currentFighterTeam)
+                {
+                    if (Vector3.Distance(currentFighterUnit.transform.position, unitTypeComponent.View.transform.position) < distanceShoot)
+                        return true;
+                }       
+            }
+            return false;
         }
+        private void StartShooting(ref ShootComponent shootComp, float time)
+        {
+            GameObject newFighter = Object.Instantiate(shootComp.Bullet, shootComp.Spawn.position, shootComp.Bullet.transform.rotation);
+            Rigidbody rb = newFighter.GetComponent<Rigidbody>();
+            rb.AddForce(-shootComp.Spawn.forward * 300);
+        }
+      
     }
 }

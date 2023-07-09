@@ -20,7 +20,7 @@ namespace Client {
                  .Add (new SpawnFighter())
                  .Add (new MoveSystem())
                  .Add(new ShootInitSystem())
-                  .Add(new ShootRunSystem())
+                 .Add(new ShootRunSystem())
                 // .Add (new TestSystem2 ())
 
                 // register additional worlds here, for example:

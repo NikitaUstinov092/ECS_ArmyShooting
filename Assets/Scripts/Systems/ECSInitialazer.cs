@@ -15,7 +15,7 @@ namespace Client
             EcsPool<HealthComponent> poolHealth = world.GetPool<HealthComponent>();
             EcsPool<ArmyComponent> poolArmy = world.GetPool<ArmyComponent>();
             EcsPool<MoveComponent> poolMove = world.GetPool<MoveComponent>();
-    
+            EcsPool<ShootComponent> poolShoot = world.GetPool<ShootComponent>();
 
             int armyCount = 2; // Общее количество армий
             int entitiesPerArmy = _data.Value.CountSpawnInRow * _data.Value.Row; // Количество сущностей на каждую армию
@@ -30,7 +30,11 @@ namespace Client
                 // Присваиваем каждой сущности армию
                 int armyId = i / entitiesPerArmy; // Делим индекс на количество сущностей на каждую армию
                 poolArmy.Add(entity).TeamNumber = armyId;
+                poolShoot.Add(entity);
+
             }
         }
+
+        
     }
 }
