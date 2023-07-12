@@ -21,6 +21,7 @@ namespace Client {
                  .Add (new MoveSystem())
                  .Add(new ShootInitSystem())
                  .Add(new ShootRunSystem())
+                  .Add(new ShootCountDownSystem())
                 // .Add (new TestSystem2 ())
 
                 // register additional worlds here, for example:

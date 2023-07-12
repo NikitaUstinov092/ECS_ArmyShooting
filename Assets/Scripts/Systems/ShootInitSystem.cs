@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
+
 
 struct ShootInitSystem : IEcsInitSystem
 {
@@ -8,24 +8,21 @@ struct ShootInitSystem : IEcsInitSystem
     private readonly EcsFilterInject<Inc<ArmyComponent, UnitTypeComponent, ShootComponent>> ecsFilterArmyUnitType;
     public void Init(IEcsSystems systems)
     {
-        var world = systems.GetWorld();
-
         foreach (var entityIndex in ecsFilterArmyUnitType.Value)
-        {        
-          
+        {                 
             ref var armyComponent = ref ecsFilterArmyUnitType.Pools.Inc1.Get(entityIndex);
             ref var unitTypeComponent = ref ecsFilterArmyUnitType.Pools.Inc2.Get(entityIndex);
             ref var shootComponent = ref ecsFilterArmyUnitType.Pools.Inc3.Get(entityIndex);
 
             if (armyComponent.TeamNumber == 0)        
-                SetShootCompEntity(entityIndex, ref shootComponent, ref unitTypeComponent, "Red Team");
+                SetShootCompEntity (ref shootComponent, ref unitTypeComponent, "Red Team");
                       
             else if (armyComponent.TeamNumber == 1)           
-                SetShootCompEntity(entityIndex, ref shootComponent,ref  unitTypeComponent, "Blue Team");                          
+                SetShootCompEntity(ref shootComponent,ref  unitTypeComponent, "Blue Team");                          
         }
     }
 
-    private void SetShootCompEntity(int entity, ref ShootComponent poolShoot, ref UnitTypeComponent unit, string targetTag)
+    private void SetShootCompEntity(ref ShootComponent poolShoot, ref UnitTypeComponent unit, string targetTag)
     {
         poolShoot.Spawn = unit.View.transform;
         poolShoot.TargetTag = targetTag;
