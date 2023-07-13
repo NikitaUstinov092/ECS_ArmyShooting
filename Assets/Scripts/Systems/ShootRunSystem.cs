@@ -1,7 +1,5 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Client

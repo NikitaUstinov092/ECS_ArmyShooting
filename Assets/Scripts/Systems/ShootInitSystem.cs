@@ -15,18 +15,18 @@ struct ShootInitSystem : IEcsInitSystem
             ref var shootComponent = ref ecsFilterArmyUnitType.Pools.Inc3.Get(entityIndex);
 
             if (armyComponent.TeamNumber == 0)        
-                SetShootCompEntity (ref shootComponent, ref unitTypeComponent, "Red Team");
+                SetShootCompEntity (ref shootComponent, ref unitTypeComponent, "Red Team",  _data.Value.BulletBlue);
                       
             else if (armyComponent.TeamNumber == 1)           
-                SetShootCompEntity(ref shootComponent,ref  unitTypeComponent, "Blue Team");                          
+                SetShootCompEntity(ref shootComponent, ref  unitTypeComponent, "Blue Team", _data.Value.BulletRed);                          
         }
     }
 
-    private void SetShootCompEntity(ref ShootComponent poolShoot, ref UnitTypeComponent unit, string targetTag)
+    private void SetShootCompEntity(ref ShootComponent poolShoot, ref UnitTypeComponent unit, string targetTag, GameObject bullet)
     {
         poolShoot.Spawn = unit.View.transform;
         poolShoot.TargetTag = targetTag;
-        poolShoot.Bullet = _data.Value.Bullet;
+        poolShoot.Bullet = bullet;
     }
 
 

@@ -496,7 +496,8 @@ MonoBehaviour:
     ShotDistance: 15
     RedFighter: {fileID: 3899034627970750212, guid: 6bad952d8a4bf334c9006c8316e62d4c, type: 3}
     BlueFighter: {fileID: 4757280415597163549, guid: 63ea1e1cdab886b489a14bb8da4b964d, type: 3}
-    Bullet: {fileID: 2635372317800401753, guid: 19cff2dffeeb2a74f994d87b2d2358d1, type: 3}
+    BulletBlue: {fileID: 2635372317800401753, guid: 19cff2dffeeb2a74f994d87b2d2358d1, type: 3}
+    BulletRed: {fileID: 2635372317800401753, guid: 098be4d84d8dad441bfb090a45f17c1e, type: 3}
     RedTeamStartPoint: {fileID: 504743592}
     BlueTeamStartPoint: {fileID: 238504859}
 --- !u!4 &1547043280

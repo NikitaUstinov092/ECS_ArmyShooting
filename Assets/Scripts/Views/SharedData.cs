@@ -10,7 +10,9 @@ public class SharedData
 
     public GameObject RedFighter;
     public GameObject BlueFighter;
-    public GameObject Bullet;
+
+    public GameObject BulletBlue;
+    public GameObject BulletRed;
 
     public Transform RedTeamStartPoint;
     public Transform BlueTeamStartPoint;
