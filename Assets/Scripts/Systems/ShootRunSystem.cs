@@ -13,7 +13,7 @@ namespace Client
 
         private const float distanceShoot = 3000;
         public void Run(IEcsSystems systems)
-        {       
+        {
             foreach (var entityIndex in ecsFilterS.Value)
             {
                 ref var shootComponent = ref ecsFilterS.Pools.Inc1.Get(entityIndex);

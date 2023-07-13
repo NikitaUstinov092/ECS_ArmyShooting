@@ -4,4 +4,5 @@ using UnityEngine;
 
 public struct ShootCountDownComponent
 {
+    public bool IsWaiting;
 }

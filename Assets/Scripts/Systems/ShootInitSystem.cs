@@ -1,6 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-
+using UnityEngine;
 
 struct ShootInitSystem : IEcsInitSystem
 {
