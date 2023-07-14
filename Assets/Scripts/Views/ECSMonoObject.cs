@@ -10,13 +10,13 @@ public abstract class ECSMonoObject : MonoBehaviour
 
     protected virtual void OnTriggerAction(ECSMonoObject firstCollide, ECSMonoObject secondCollide)
     {
-        if (_world != null)
-        {
-            int entity = _world.NewEntity();
-            var poolHitC = _world.GetPool<HitComponent>();
-            ref HitComponent hitC = ref poolHitC.Add(entity);
-            hitC.firstCollide = firstCollide;
-            hitC.secondCollide = secondCollide;
-        }
+        if (_world == null)
+            return;
+        
+       int entity = _world.NewEntity();
+       var poolHitC = _world.GetPool<HitComponent>();
+       ref HitComponent hitC = ref poolHitC.Add(entity);
+       hitC.FirstCollider = firstCollide;
+       hitC.SecondCollider = secondCollide;       
     }
 }

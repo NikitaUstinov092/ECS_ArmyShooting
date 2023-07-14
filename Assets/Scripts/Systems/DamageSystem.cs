@@ -14,28 +14,28 @@ internal struct DamageSystem : IEcsRunSystem
             foreach (var entity in _filterHits.Value)
             {
               
-            ref HitComponent hitC = ref _poolHits.Value.Get(entity);
+                ref HitComponent hitC = ref _poolHits.Value.Get(entity);
 
-            if (hitC.firstCollide == null)
-                continue;
+                if (hitC.FirstCollider == null)
+                   continue;
 
-            if (hitC.secondCollide == null)
-                continue;
+                if (hitC.SecondCollider == null)
+                   continue;
 
-            if (hitC.firstCollide.tag == hitC.secondCollide.tag)
-                continue;
+                if (hitC.FirstCollider.tag == hitC.SecondCollider.tag)
+                   continue;
 
-            if (hitC.firstCollide.GetComponent<BulletHitColider>()!=null 
-                && hitC.secondCollide.GetComponent<BulletHitColider>() != null)
-                continue;
+                if (hitC.FirstCollider.GetComponent<BulletHitColider>()!=null 
+                   && hitC.SecondCollider.GetComponent<BulletHitColider>() != null)
+                   continue;
 
-            int fighterEntity = PackerEntityUtils.UnpackEntities(_world.Value, hitC.secondCollide.ecsPacked);
+                int fighterEntity = PackerEntityUtils.UnpackEntities(_world.Value, hitC.SecondCollider.ecsPacked);
             
-            ref HealthComponent healthC = ref _poolHealth.Value.Get(fighterEntity);
+                ref HealthComponent healthC = ref _poolHealth.Value.Get(fighterEntity);
 
-            healthC.Health -= _damage;
+                healthC.Health -= _damage;
 
-                Object.DestroyImmediate(hitC.firstCollide.gameObject);
+                Object.DestroyImmediate(hitC.FirstCollider.gameObject);
                 _world.Value.DelEntity(entity);
                
             }

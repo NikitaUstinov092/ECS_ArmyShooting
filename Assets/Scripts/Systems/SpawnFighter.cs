@@ -52,15 +52,12 @@ struct SpawnFighter : IEcsInitSystem
                 ECSMonoObject newFighter = Object.Instantiate(prefab, spawnPosition + offset, Quaternion.identity); 
                 newFighter.transform.parent = parent.transform;
 
-                newFighter.transform.rotation = Quaternion.Euler(0, rotation, 0);
-                
-                newFighter.tag = teamName;
+                newFighter.transform.rotation = Quaternion.Euler(0, rotation, 0);              
 
                 newFighter.Init(_world);
                 massTeam.Add(newFighter);
             }
         }
-
         return massTeam;
     }
     private ECSMonoObject GetFighter(List<ECSMonoObject> list)

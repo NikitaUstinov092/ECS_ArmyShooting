@@ -1,8 +1,5 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-
-namespace Client
-{
     public struct ECSInitialazer : IEcsInitSystem
     {
         private readonly EcsCustomInject<SharedData> _data;
@@ -38,4 +35,3 @@ namespace Client
 
         
     }
-}

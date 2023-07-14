@@ -3,16 +3,15 @@ using Leopotam.EcsLite.Di;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Client {
     struct ShootCountDownSystem : IEcsRunSystem {
-        private readonly EcsFilterInject<Inc<ShootCountDownComponent>> shootCountDownPool;
+        private readonly EcsFilterInject<Inc<ShootCountDownComponent>> _shootCountDownPool;
         public void Run(IEcsSystems systems)
         {
-            foreach (var entityIndex in shootCountDownPool.Value)
+            foreach (var entityIndex in _shootCountDownPool.Value)
             {
-                if (shootCountDownPool.Pools.Inc1.Has(entityIndex))
+                if (_shootCountDownPool.Pools.Inc1.Has(entityIndex))
                 {
-                    ref var shootCountDownPoolComp = ref shootCountDownPool.Pools.Inc1.Get(entityIndex);
+                    ref var shootCountDownPoolComp = ref _shootCountDownPool.Pools.Inc1.Get(entityIndex);
 
                     if (!shootCountDownPoolComp.ShootWaiting)
                     {
@@ -27,7 +26,7 @@ namespace Client {
         private async Task DeleteComponent(int entityIndex, ShootCountDownComponent comp)
         {
             await Task.Delay(GetRandomTime());
-            shootCountDownPool.Pools.Inc1.Del(entityIndex);
+            _shootCountDownPool.Pools.Inc1.Del(entityIndex);
             comp.ShootWaiting = false;
         }
 
@@ -36,7 +35,3 @@ namespace Client {
             return Random.Range(2000, 3000);
         }
     }
-
-
-  
-}

@@ -3,7 +3,6 @@ using Leopotam.EcsLite.Di;
 using System;
 using UnityEngine;
 
-namespace Client {
    public sealed class EcsStartup : MonoBehaviour    
    {
         private EcsWorld _world;
@@ -66,5 +65,5 @@ namespace Client {
         }
     }
 
-}
+
 

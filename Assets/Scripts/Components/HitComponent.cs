@@ -1,5 +1,5 @@
     internal struct HitComponent
     {
-        public ECSMonoObject firstCollide;
-        public ECSMonoObject secondCollide;
+        public ECSMonoObject FirstCollider;
+        public ECSMonoObject SecondCollider;
     }
