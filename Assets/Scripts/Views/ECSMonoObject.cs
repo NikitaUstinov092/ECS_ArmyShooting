@@ -12,7 +12,6 @@ public abstract class ECSMonoObject : MonoBehaviour
     {
         if (_world != null)
         {
-            Debug.Log("OnTriggerAction");
             int entity = _world.NewEntity();
             var poolHitC = _world.GetPool<HitComponent>();
             ref HitComponent hitC = ref poolHitC.Add(entity);

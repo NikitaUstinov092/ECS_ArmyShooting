@@ -13,32 +13,31 @@ internal struct DamageSystem : IEcsRunSystem
         {
             foreach (var entity in _filterHits.Value)
             {
-              ref HitComponent hitC = ref _poolHits.Value.Get(entity);
+              
+            ref HitComponent hitC = ref _poolHits.Value.Get(entity);
 
             if (hitC.firstCollide == null)
                 continue;
+
             if (hitC.secondCollide == null)
                 continue;
 
             if (hitC.firstCollide.tag == hitC.secondCollide.tag)
                 continue;
 
-            hitC.firstCollide.gameObject.TryGetComponent(out BulletHitColider firstBullet);
-              hitC.secondCollide.gameObject.TryGetComponent(out BulletHitColider secondBullet);
+            if (hitC.firstCollide.GetComponent<BulletHitColider>()!=null 
+                && hitC.secondCollide.GetComponent<BulletHitColider>() != null)
+                continue;
 
-            if (firstBullet != null && secondBullet != null)
-                continue;          
-
-            (int, int) entitiesCollide =
-                       PackerEntityUtils.UnpackEntities(_world.Value, hitC.firstCollide.ecsPacked, hitC.secondCollide.ecsPacked); //“ы пытаешьс€ распаковать entity а она удалена
-
-                ref HealthComponent healthC = ref _poolHealth.Value.Get(entitiesCollide.Item1);
-               
-                healthC.Health -= _damage;
+            int fighterEntity = PackerEntityUtils.UnpackEntities(_world.Value, hitC.secondCollide.ecsPacked);
             
-            Object.Destroy(hitC.firstCollide.gameObject);
-            _world.Value.DelEntity(entity);        
+            ref HealthComponent healthC = ref _poolHealth.Value.Get(fighterEntity);
 
+            healthC.Health -= _damage;
+
+                Object.DestroyImmediate(hitC.firstCollide.gameObject);
+                _world.Value.DelEntity(entity);
+               
             }
         }
     }

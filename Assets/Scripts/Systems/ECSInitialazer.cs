@@ -16,7 +16,7 @@ namespace Client
             EcsPool<ArmyComponent> poolArmy = world.GetPool<ArmyComponent>();
             EcsPool<MoveComponent> poolMove = world.GetPool<MoveComponent>();
             EcsPool<ShootComponent> poolShoot = world.GetPool<ShootComponent>();
-          //  EcsPool<ShootCountDownComponent> shootCountDownPool = world.GetPool<ShootCountDownComponent>();
+         
 
             int armyCount = 2; // Общее количество армий
             int entitiesPerArmy = _data.Value.CountSpawnInRow * _data.Value.Row; // Количество сущностей на каждую армию

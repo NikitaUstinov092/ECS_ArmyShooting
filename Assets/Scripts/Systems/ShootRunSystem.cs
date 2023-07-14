@@ -25,7 +25,6 @@ using UnityEngine;
                     {
                         var bullet = StartShootingAsync(shootComponent);
                         bullet.Init(_world);
-                        bullet.PackEntity(entityIndex);
                         AddShootCountDownComponent(entityIndex);
                     }
                 }

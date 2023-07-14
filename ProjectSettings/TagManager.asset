@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Blue Team
   - Red Team
+  - bullet
   layers:
   - Default
   - TransparentFX
