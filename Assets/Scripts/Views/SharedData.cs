@@ -8,11 +8,11 @@ public class SharedData
     public int Row;
     public float ShotDistance; 
 
-    public GameObject RedFighter;
-    public GameObject BlueFighter;
+    public ECSMonoObject RedFighter;
+    public ECSMonoObject BlueFighter;
 
-    public GameObject BulletBlue;
-    public GameObject BulletRed;
+    public ECSMonoObject BulletBlue;
+    public ECSMonoObject BulletRed;
 
     public Transform RedTeamStartPoint;
     public Transform BlueTeamStartPoint;

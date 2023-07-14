@@ -2,16 +2,17 @@ using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace Client
-{
     struct ShootRunSystem : IEcsRunSystem
     {     
         private readonly EcsFilterInject<Inc<ShootComponent, ArmyComponent, UnitTypeComponent>> ecsFilterS;
         private readonly EcsFilterInject<Inc<ShootCountDownComponent>> shootCountDownPool;
-
+        private EcsWorld _world;
         private const float distanceShoot = 3000;
         public void Run(IEcsSystems systems)
         {
+            if (_world == null)
+                _world = systems.GetWorld();
+
             foreach (var entityIndex in ecsFilterS.Value)
             {
                 ref var shootComponent = ref ecsFilterS.Pools.Inc1.Get(entityIndex);
@@ -22,7 +23,9 @@ namespace Client
                 {
                     if (!shootCountDownPool.Pools.Inc1.Has(entityIndex))
                     {
-                        StartShootingAsync(shootComponent);
+                        var bullet = StartShootingAsync(shootComponent);
+                        bullet.Init(_world);
+                        bullet.PackEntity(entityIndex);
                         AddShootCountDownComponent(entityIndex);
                     }
                 }
@@ -49,11 +52,12 @@ namespace Client
             return false;
         }
 
-        private void StartShootingAsync(ShootComponent shootComp)
+        private ECSMonoObject StartShootingAsync(ShootComponent shootComp)
         {
-            GameObject newFighter = Object.Instantiate(shootComp.Bullet, shootComp.Spawn.position, shootComp.Bullet.transform.rotation);
+            ECSMonoObject newFighter = Object.Instantiate(shootComp.Bullet, shootComp.Spawn.position, shootComp.Bullet.transform.rotation);
             Rigidbody rb = newFighter.GetComponent<Rigidbody>();
             rb.AddForce(-shootComp.Spawn.forward * 500);
+            return newFighter;
         }
 
         private void AddShootCountDownComponent(int entityIndex)
@@ -61,4 +65,4 @@ namespace Client
             shootCountDownPool.Pools.Inc1.Add(entityIndex);
         }
     }
-}
+

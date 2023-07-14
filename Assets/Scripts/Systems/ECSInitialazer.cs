@@ -26,7 +26,7 @@ namespace Client
                 int entity = world.NewEntity();
                 poolBlock.Add(entity);
                 poolMove.Add(entity);
-                poolHealth.Add(entity).Health = 100;
+                poolHealth.Add(entity).Health = 5;
       
                 // Присваиваем каждой сущности армию
                 int armyId = i / entitiesPerArmy; // Делим индекс на количество сущностей на каждую армию

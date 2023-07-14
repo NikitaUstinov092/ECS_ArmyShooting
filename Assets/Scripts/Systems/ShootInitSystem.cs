@@ -22,7 +22,7 @@ struct ShootInitSystem : IEcsInitSystem
         }
     }
 
-    private void SetShootCompEntity(ref ShootComponent poolShoot, ref UnitTypeComponent unit, string targetTag, GameObject bullet)
+    private void SetShootCompEntity(ref ShootComponent poolShoot, ref UnitTypeComponent unit, string targetTag, ECSMonoObject bullet)
     {
         poolShoot.Spawn = unit.View.transform;
         poolShoot.TargetTag = targetTag;
