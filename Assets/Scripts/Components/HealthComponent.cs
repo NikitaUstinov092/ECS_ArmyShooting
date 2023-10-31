@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-    struct HealthComponent 
-    {
-      public int Health;
-        
-    }
+﻿struct HealthComponent 
+{
+    public int Health;
+}

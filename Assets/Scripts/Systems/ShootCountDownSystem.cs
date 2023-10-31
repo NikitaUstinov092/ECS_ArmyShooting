@@ -18,7 +18,6 @@ using UnityEngine;
                         shootCountDownPoolComp.ShootWaiting = true;
                         DeleteComponent(entityIndex, shootCountDownPoolComp);
                     }
-                                  
                 }
             }
         }

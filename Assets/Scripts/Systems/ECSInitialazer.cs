@@ -8,30 +8,26 @@ using Leopotam.EcsLite.Di;
         {
             var world = systems.GetWorld();
 
-            EcsPool<UnitTypeComponent> poolBlock = world.GetPool<UnitTypeComponent>();
-            EcsPool<HealthComponent> poolHealth = world.GetPool<HealthComponent>();
-            EcsPool<ArmyComponent> poolArmy = world.GetPool<ArmyComponent>();
-            EcsPool<MoveComponent> poolMove = world.GetPool<MoveComponent>();
-            EcsPool<ShootComponent> poolShoot = world.GetPool<ShootComponent>();
+            var poolBlock = world.GetPool<UnitTypeComponent>();
+            var poolHealth = world.GetPool<HealthComponent>();
+            var poolArmy = world.GetPool<ArmyComponent>();
+            var poolMove = world.GetPool<MoveComponent>();
+            var poolShoot = world.GetPool<ShootComponent>();
          
 
-            int armyCount = 2; // Общее количество армий
-            int entitiesPerArmy = _data.Value.CountSpawnInRow * _data.Value.Row; // Количество сущностей на каждую армию
+            const int armyCount = 2; 
+            var entitiesPerArmy = _data.Value.CountSpawnInRow * _data.Value.Row; 
 
-            for (int i = 0; i < entitiesPerArmy * armyCount; i++)
+            for (var i = 0; i < entitiesPerArmy * armyCount; i++)
             {
-                int entity = world.NewEntity();
+                var entity = world.NewEntity();
                 poolBlock.Add(entity);
                 poolMove.Add(entity);
-                poolHealth.Add(entity).Health = 5;
-      
-                // Присваиваем каждой сущности армию
-                int armyId = i / entitiesPerArmy; // Делим индекс на количество сущностей на каждую армию
+                poolHealth.Add(entity).Health = _data.Value.StartHealth;
+                
+                var armyId = i / entitiesPerArmy;
                 poolArmy.Add(entity).TeamNumber = armyId;
                 poolShoot.Add(entity);
-
             }
         }
-
-        
     }

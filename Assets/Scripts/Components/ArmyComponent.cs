@@ -1,4 +1,4 @@
 public struct ArmyComponent
 {
-    public int TeamNumber; //Синие 0, Красные 1;
+    public int TeamNumber; //РЎРёРЅРёРµ 0, РљСЂР°СЃРЅС‹Рµ 1;
 }

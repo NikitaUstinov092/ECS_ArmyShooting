@@ -18,10 +18,10 @@ using UnityEngine;
                 ref var moveComponent = ref _ecsFilter.Pools.Inc2.Get(entityIndex);
 
                 if (armyComponent.TeamNumber == 0)          
-                    moveComponent.TargteTranform = _data.Value.RedTeamStartPoint;
+                    moveComponent.TargetTransform = _data.Value.RedTeamStartPoint;
      
                 else if (armyComponent.TeamNumber == 1)
-                    moveComponent.TargteTranform = _data.Value.BlueTeamStartPoint;
+                    moveComponent.TargetTransform = _data.Value.BlueTeamStartPoint;
                
                 moveComponent.Speed = GetRandomSpeed();
             }
@@ -33,9 +33,12 @@ using UnityEngine;
                 ref var moveComponent = ref _ecsFilter.Pools.Inc2.Get(entityIndex);
                 ref var unitComponent = ref _ecsFilter.Pools.Inc3.Get(entityIndex);
 
-                unitComponent.View.transform.position = Vector3.MoveTowards(unitComponent.View.transform.position,
-                  new Vector3(unitComponent.View.transform.position.x, unitComponent.View.transform.position.y, moveComponent.TargteTranform.position.z), Time.deltaTime);
-
+                var position = unitComponent.View.transform.position;
+                
+                position = Vector3.MoveTowards(position,
+                  new Vector3(position.x, position.y, moveComponent.TargetTransform.position.z), Time.deltaTime);
+                
+                unitComponent.View.transform.position = position;
             }
         }
 

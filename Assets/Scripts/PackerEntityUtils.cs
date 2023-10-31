@@ -6,6 +6,7 @@ using System;
         {
             if (firstPacked.Unpack(world, out int entity1))
                 return entity1;
-            else throw new InvalidOperationException("Не удалось распаковать!");
+            
+            throw new InvalidOperationException("Не удалось распаковать!");
         }
     }

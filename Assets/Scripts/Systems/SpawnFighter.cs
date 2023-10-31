@@ -11,26 +11,30 @@ struct SpawnFighter : IEcsInitSystem
     public void Init(IEcsSystems systems)
     {
         _world = systems.GetWorld();
-        var BlueTeam = InstatiateTeam("Blue Team", _data.Value.BlueFighter, _data.Value.BlueTeamStartPoint.position, 0);
-        var RedTeam = InstatiateTeam("Red Team", _data.Value.RedFighter, _data.Value.RedTeamStartPoint.position, 180);
+        var blueTeam = InstatiateTeam("Blue Team", _data.Value.BlueFighter, _data.Value.BlueTeamStartPoint.position, 0);
+        var redTeam = InstatiateTeam("Red Team", _data.Value.RedFighter, _data.Value.RedTeamStartPoint.position, 180);
 
         foreach (var entityIndex in _ecsFilter.Value)
         {
             ref var unitTypeComponent = ref _ecsFilter.Pools.Inc1.Get(entityIndex);
             ref var armyComponent = ref _ecsFilter.Pools.Inc2.Get(entityIndex);
 
-            if (armyComponent.TeamNumber == 0)
+            switch (armyComponent.TeamNumber)
             {
-                var fighter = GetFighter(BlueTeam);
-                unitTypeComponent.View = fighter.gameObject;
-                fighter.PackEntity(entityIndex);
-            }                         
-            
-            else if (armyComponent.TeamNumber == 1)
-            {
-                var fighter = GetFighter(RedTeam);
-                unitTypeComponent.View = fighter.gameObject;
-                fighter.PackEntity(entityIndex);
+                case 0:
+                {
+                    var fighter = GetFighter(blueTeam);
+                    unitTypeComponent.View = fighter.gameObject;
+                    fighter.PackEntity(entityIndex);
+                    break;
+                }
+                case 1:
+                {
+                    var fighter = GetFighter(redTeam);
+                    unitTypeComponent.View = fighter.gameObject;
+                    fighter.PackEntity(entityIndex);
+                    break;
+                }
             }                      
         }
     }
@@ -42,13 +46,13 @@ struct SpawnFighter : IEcsInitSystem
 
         for (int row = 0; row < _data.Value.Row; row++)
         {
-            // Цикл для создания элементов в каждом столбце
+            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             for (int element = 0; element < _data.Value.CountSpawnInRow; element++)
             {
-                // Вычисляем позицию спавна объекта в зависимости от столбца и элемента
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 Vector3 offset = new Vector3(row * 2, 0, element * 2);
 
-                // Создаем объект на заданной позиции
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 ECSMonoObject newFighter = Object.Instantiate(prefab, spawnPosition + offset, Quaternion.identity); 
                 newFighter.transform.parent = parent.transform;
 

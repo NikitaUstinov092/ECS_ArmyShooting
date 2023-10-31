@@ -13,11 +13,15 @@ struct ShootInitSystem : IEcsInitSystem
             ref var unitTypeComponent = ref _ecsFilterArmyUnitType.Pools.Inc2.Get(entityIndex);
             ref var shootComponent = ref _ecsFilterArmyUnitType.Pools.Inc3.Get(entityIndex);
 
-            if (armyComponent.TeamNumber == 0)        
-                SetShootCompEntity (ref shootComponent, ref unitTypeComponent,  _data.Value.BulletBlue);
-                      
-            else if (armyComponent.TeamNumber == 1)           
-                SetShootCompEntity(ref shootComponent, ref  unitTypeComponent, _data.Value.BulletRed);                          
+            switch (armyComponent.TeamNumber)
+            {
+                case 0:
+                    SetShootCompEntity (ref shootComponent, ref unitTypeComponent,  _data.Value.BulletBlue);
+                    break;
+                case 1:
+                    SetShootCompEntity(ref shootComponent, ref  unitTypeComponent, _data.Value.BulletRed);
+                    break;
+            }                          
         }
     }
 

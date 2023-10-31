@@ -6,6 +6,7 @@ public class SharedData
 {
     public int CountSpawnInRow;
     public int Row;
+    public int StartHealth;
     public float ShotDistance; 
 
     public ECSMonoObject RedFighter;

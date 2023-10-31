@@ -1,13 +1,14 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using System;
 using UnityEngine;
 
    public sealed class EcsStartup : MonoBehaviour    
    {
+        [SerializeField]
+        private SharedData _data;
+        
         private EcsWorld _world;
         private IEcsSystems _systems;
-        [SerializeField]private SharedData _data;
 
         private void Start () 
         {
@@ -20,9 +21,9 @@ using UnityEngine;
                  .Add (new MoveSystem())
                  .Add(new ShootInitSystem())
                  .Add(new ShootRunSystem())
-                  .Add(new ShootCountDownSystem())            
-                  .Add(new DamageSystem())
-                  .Add(new DestroySystem())
+                 .Add(new ShootCountDownSystem())            
+                 .Add(new DamageSystem())
+                 .Add(new DestroySystem())
 
                 // .Add (new TestSystem2 ())
 
@@ -58,10 +59,10 @@ using UnityEngine;
             // cleanup custom worlds here.
             
             // cleanup default world.
-            if (_world != null) {
-                _world.Destroy ();
-                _world = null;
-            }
+            if (_world == null) 
+                return;
+            _world.Destroy ();
+            _world = null;
         }
     }
 

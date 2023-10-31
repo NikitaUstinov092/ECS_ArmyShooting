@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class ECSMonoObject : MonoBehaviour
 {
     public EcsPackedEntity ecsPacked { get; private set; }
-    protected EcsWorld _world;
+    private EcsWorld _world;
     public void Init(EcsWorld world) => _world = world;
     public void PackEntity(int entity) => ecsPacked = _world.PackEntity(entity);
 
@@ -13,10 +13,10 @@ public abstract class ECSMonoObject : MonoBehaviour
         if (_world == null)
             return;
         
-       int entity = _world.NewEntity();
-       var poolHitC = _world.GetPool<HitComponent>();
-       ref HitComponent hitC = ref poolHitC.Add(entity);
-       hitC.FirstCollider = firstCollide;
-       hitC.SecondCollider = secondCollide;       
+        var entity = _world.NewEntity();
+        var poolHitC = _world.GetPool<HitComponent>();
+        ref HitComponent hitC = ref poolHitC.Add(entity);
+        hitC.FirstCollider = firstCollide;
+        hitC.SecondCollider = secondCollide;       
     }
 }

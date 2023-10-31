@@ -8,7 +8,7 @@ internal struct DamageSystem : IEcsRunSystem
         private readonly EcsPoolInject<HitComponent> _poolHits;
         private readonly EcsPoolInject<HealthComponent> _poolHealth;
         private readonly EcsWorldInject _world;
-        private const int _damage = 1; 
+        private const int Damage = 1; 
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _filterHits.Value)
@@ -22,7 +22,7 @@ internal struct DamageSystem : IEcsRunSystem
                 if (hitC.SecondCollider == null)
                    continue;
 
-                if (hitC.FirstCollider.tag == hitC.SecondCollider.tag)
+                if (hitC.FirstCollider.CompareTag(hitC.SecondCollider.tag))
                    continue;
 
                 if (hitC.FirstCollider.GetComponent<BulletHitColider>()!=null 
@@ -33,7 +33,7 @@ internal struct DamageSystem : IEcsRunSystem
             
                 ref HealthComponent healthC = ref _poolHealth.Value.Get(fighterEntity);
 
-                healthC.Health -= _damage;
+                healthC.Health -= Damage;
 
                 Object.DestroyImmediate(hitC.FirstCollider.gameObject);
                 _world.Value.DelEntity(entity);
