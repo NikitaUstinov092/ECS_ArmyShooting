@@ -8,12 +8,12 @@ internal struct DamageSystem : IEcsRunSystem
         private readonly EcsPoolInject<HitComponent> _poolHits;
         private readonly EcsPoolInject<HealthComponent> _poolHealth;
         private readonly EcsWorldInject _world;
+       
         private const int Damage = 1; 
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _filterHits.Value)
             {
-              
                 ref HitComponent hitC = ref _poolHits.Value.Get(entity);
 
                 if (hitC.FirstCollider == null)
@@ -36,8 +36,9 @@ internal struct DamageSystem : IEcsRunSystem
                 healthC.Health -= Damage;
 
                 Object.DestroyImmediate(hitC.FirstCollider.gameObject);
+                
+                /*_poolHits.Value.Del(entity);*/
                 _world.Value.DelEntity(entity);
-               
             }
         }
     }

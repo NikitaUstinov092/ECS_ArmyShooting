@@ -1,4 +1,4 @@
-﻿public struct DamageComponent 
+﻿public struct DamageComponent
 {
-        
+    public float Damage;
 }

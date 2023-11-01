@@ -1,11 +1,17 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Systems.Unit;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Views;
 
-   public sealed class EcsStartup : MonoBehaviour    
+public sealed class EcsStartup : MonoBehaviour    
    {
+        [FormerlySerializedAs("_data")] [SerializeField]
+        private UnitData _unitData;
+        
         [SerializeField]
-        private SharedData _data;
+        private BulletData _bulletData;
         
         private EcsWorld _world;
         private IEcsSystems _systems;
@@ -16,8 +22,10 @@ using UnityEngine;
             _systems = new EcsSystems (_world);
             _systems
                 // register your systems here, for example:
-                 .Add (new ECSInitialazer ())
-                 .Add (new SpawnFighter())
+                 .Add (new UnitEntityInitialazerSystem())
+                 .Add (new UnitTeamSelectorSystem())
+                 .Add (new UnitComponentSettingSystem())
+                 .Add (new SpawnUnit())
                  .Add (new MoveSystem())
                  .Add(new ShootInitSystem())
                  .Add(new ShootRunSystem())
@@ -35,7 +43,8 @@ using UnityEngine;
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
 #endif          
                 .Inject()
-                .Inject(_data)
+                .Inject(_unitData)
+                .Inject(_bulletData)
                 .Init ();
         }
 

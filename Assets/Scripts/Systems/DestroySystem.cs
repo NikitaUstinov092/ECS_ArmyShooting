@@ -16,11 +16,10 @@ using UnityEngine;
                 ref var viewC = ref _poolView.Value.Get(entity);
                 var healthC = _poolHealth.Value.Get(entity);
 
-                if (healthC.Health <= 0)
-                {
-                    Object.DestroyImmediate(viewC.View);
-                    _world.Value.DelEntity(entity);
-                }
+                if (healthC.Health > 0)
+                    continue;
+                Object.DestroyImmediate(viewC.View);
+                _world.Value.DelEntity(entity);
             }
         }
     }

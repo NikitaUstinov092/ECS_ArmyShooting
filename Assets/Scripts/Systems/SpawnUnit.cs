@@ -1,12 +1,15 @@
+using System;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-struct SpawnFighter : IEcsInitSystem
+struct SpawnUnit : IEcsInitSystem
 {
-    private readonly EcsCustomInject<SharedData> _data;
-    private readonly EcsFilterInject<Inc<UnitTypeComponent, ArmyComponent>> _ecsFilter;
+    private readonly EcsCustomInject<UnitData> _data;
+    private readonly EcsFilterInject<Inc<UnitTypeComponent, TeamComponent>> _ecsFilter;
     private EcsWorld _world;
     public void Init(IEcsSystems systems)
     {
@@ -19,7 +22,7 @@ struct SpawnFighter : IEcsInitSystem
             ref var unitTypeComponent = ref _ecsFilter.Pools.Inc1.Get(entityIndex);
             ref var armyComponent = ref _ecsFilter.Pools.Inc2.Get(entityIndex);
 
-            switch (armyComponent.TeamNumber)
+            switch (armyComponent.TeamType)
             {
                 case 0:
                 {
@@ -46,13 +49,10 @@ struct SpawnFighter : IEcsInitSystem
 
         for (int row = 0; row < _data.Value.Row; row++)
         {
-            // ���� ��� �������� ��������� � ������ �������
             for (int element = 0; element < _data.Value.CountSpawnInRow; element++)
             {
-                // ��������� ������� ������ ������� � ����������� �� ������� � ��������
                 Vector3 offset = new Vector3(row * 2, 0, element * 2);
-
-                // ������� ������ �� �������� �������
+                
                 ECSMonoObject newFighter = Object.Instantiate(prefab, spawnPosition + offset, Quaternion.identity); 
                 newFighter.transform.parent = parent.transform;
 
@@ -64,8 +64,9 @@ struct SpawnFighter : IEcsInitSystem
         }
         return massTeam;
     }
-    private ECSMonoObject GetFighter(List<ECSMonoObject> list)
+    private ECSMonoObject GetFighter([NotNull] List<ECSMonoObject> list)
     {
+        if (list == null) throw new ArgumentNullException(nameof(list));
         if (list.Count <= 0)
             return null;
 

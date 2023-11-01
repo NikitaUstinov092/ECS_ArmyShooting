@@ -9,20 +9,20 @@ using UnityEngine;
         {
             foreach (var entityIndex in _shootCountDownPool.Value)
             {
-                if (_shootCountDownPool.Pools.Inc1.Has(entityIndex))
-                {
-                    ref var shootCountDownPoolComp = ref _shootCountDownPool.Pools.Inc1.Get(entityIndex);
+                if (!_shootCountDownPool.Pools.Inc1.Has(entityIndex))
+                    continue;
+                
+                ref var shootCountDownPoolComp = ref _shootCountDownPool.Pools.Inc1.Get(entityIndex);
 
-                    if (!shootCountDownPoolComp.ShootWaiting)
-                    {
-                        shootCountDownPoolComp.ShootWaiting = true;
-                        DeleteComponent(entityIndex, shootCountDownPoolComp);
-                    }
-                }
+                if (shootCountDownPoolComp.ShootWaiting) 
+                    continue;
+                
+                shootCountDownPoolComp.ShootWaiting = true;
+                DeleteComponent(entityIndex, shootCountDownPoolComp);
             }
         }
 
-        private async Task DeleteComponent(int entityIndex, ShootCountDownComponent comp)
+        private async void DeleteComponent(int entityIndex, ShootCountDownComponent comp)
         {
             await Task.Delay(GetRandomTime());
             _shootCountDownPool.Pools.Inc1.Del(entityIndex);

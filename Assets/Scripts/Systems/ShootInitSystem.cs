@@ -1,10 +1,13 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Views;
 
 struct ShootInitSystem : IEcsInitSystem
 {
-    private readonly EcsCustomInject<SharedData> _data;
-    private readonly EcsFilterInject<Inc<ArmyComponent, UnitTypeComponent, ShootComponent>> _ecsFilterArmyUnitType;
+    private readonly EcsCustomInject<UnitData> _unitData;
+    private readonly EcsCustomInject<BulletData> _bulletData;
+    
+    private readonly EcsFilterInject<Inc<TeamComponent, UnitTypeComponent, ShootComponent>> _ecsFilterArmyUnitType;
     public void Init(IEcsSystems systems)
     {
         foreach (var entityIndex in _ecsFilterArmyUnitType.Value)
@@ -13,14 +16,14 @@ struct ShootInitSystem : IEcsInitSystem
             ref var unitTypeComponent = ref _ecsFilterArmyUnitType.Pools.Inc2.Get(entityIndex);
             ref var shootComponent = ref _ecsFilterArmyUnitType.Pools.Inc3.Get(entityIndex);
 
-            switch (armyComponent.TeamNumber)
+            switch (armyComponent.TeamType)
             {
-                case 0:
-                    SetShootCompEntity (ref shootComponent, ref unitTypeComponent,  _data.Value.BulletBlue);
+                /*case 0:
+                    SetShootCompEntity (ref shootComponent, ref unitTypeComponent,  _bulletData.Value.BulletBlue);
                     break;
                 case 1:
-                    SetShootCompEntity(ref shootComponent, ref  unitTypeComponent, _data.Value.BulletRed);
-                    break;
+                    SetShootCompEntity(ref shootComponent, ref  unitTypeComponent, _bulletData.Value.BulletRed);
+                    break;*/
             }                          
         }
     }
