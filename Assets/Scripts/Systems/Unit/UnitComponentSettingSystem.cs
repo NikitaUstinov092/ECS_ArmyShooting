@@ -6,7 +6,7 @@ namespace Systems.Unit
 {
     public struct UnitComponentSettingSystem: IEcsInitSystem
     {
-        private readonly EcsFilterInject<Inc< UnitTypeComponent, HealthComponent, TeamComponent, MoveComponent, ShootComponent, DamageComponent>> _ecsFilter;
+        private readonly EcsFilterInject<Inc< ViewComponent, HealthComponent, TeamComponent, MoveComponent, ShootComponent, DamageComponent>> _ecsFilter;
         private readonly EcsCustomInject<UnitData> _unitData;
         
         public void Init(IEcsSystems systems)
@@ -21,27 +21,26 @@ namespace Systems.Unit
                 ref var damage = ref _ecsFilter.Pools.Inc6.Get(entityIndex);
                 
                 ref var move = ref _ecsFilter.Pools.Inc4.Get(entityIndex);
-                ref var shoot = ref _ecsFilter.Pools.Inc5.Get(entityIndex);
+                
+                SetView(ref unitType, ref unitTeam, ref unitData);
+                SetMoveVector(ref unitTeam, ref move, ref unitData);
                 
                 health.Health = unitData.StartHealth;
                 damage.Damage = unitData.Damage;
-
-                SetView(unitType, unitTeam, unitData);
-                SetMoveVector(unitTeam, move, unitData);
             }
         }
         
-        private void SetView(UnitTypeComponent unitType, TeamComponent team, UnitData data)
+        private void SetView(ref ViewComponent view,ref TeamComponent team,ref UnitData data)
         {
-            unitType.View = team.TeamType switch
+            view.View = team.TeamType switch
             {
-                1 => data.RedFighter,
-                2 => data.BlueFighter,
-                _ => unitType.View
+                1 => data.RedFighter.gameObject,
+                2 => data.BlueFighter.gameObject,
+                _ => view.View
             };
         }
 
-        private void SetMoveVector(TeamComponent team, MoveComponent move, UnitData data)
+        private void SetMoveVector(ref TeamComponent team,ref MoveComponent move, ref UnitData data)
         {
             move.Speed = data.Speed;
             move.Direction = team.TeamType switch

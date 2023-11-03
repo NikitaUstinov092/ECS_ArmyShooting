@@ -3,12 +3,12 @@ using UnityEngine;
 
 public abstract class ECSMonoObject : MonoBehaviour
 {
-    public EcsPackedEntity ecsPacked { get; private set; }
+    public EcsPackedEntity EcsPacked { get; private set; }
     private EcsWorld _world;
     public void Init(EcsWorld world) => _world = world;
-    public void PackEntity(int entity) => ecsPacked = _world.PackEntity(entity);
+    public void PackEntity(int entity) => EcsPacked = _world.PackEntity(entity);
 
-    protected virtual void OnTriggerAction(ECSMonoObject firstCollide, ECSMonoObject secondCollide)
+    protected void OnTriggerAction(ECSMonoObject firstCollide, ECSMonoObject secondCollide)
     {
         if (_world == null)
             return;

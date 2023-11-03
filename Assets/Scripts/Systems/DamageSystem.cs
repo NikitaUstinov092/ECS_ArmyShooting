@@ -29,7 +29,7 @@ internal struct DamageSystem : IEcsRunSystem
                    && hitC.SecondCollider.GetComponent<BulletHitColider>() != null)
                    continue;
 
-                int fighterEntity = PackerEntityUtils.UnpackEntities(_world.Value, hitC.SecondCollider.ecsPacked);
+                int fighterEntity = PackerEntityUtils.UnpackEntities(_world.Value, hitC.SecondCollider.EcsPacked);
             
                 ref HealthComponent healthC = ref _poolHealth.Value.Get(fighterEntity);
 

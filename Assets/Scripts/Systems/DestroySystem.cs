@@ -4,8 +4,8 @@ using UnityEngine;
 
     internal struct DestroySystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<UnitTypeComponent, HealthComponent>> _filterHealth;
-        private readonly EcsPoolInject<UnitTypeComponent> _poolView;
+        private readonly EcsFilterInject<Inc<ViewComponent, HealthComponent>> _filterHealth;
+        private readonly EcsPoolInject<ViewComponent> _poolView;
         private readonly EcsPoolInject<HealthComponent> _poolHealth;
         private readonly EcsWorldInject _world;
 

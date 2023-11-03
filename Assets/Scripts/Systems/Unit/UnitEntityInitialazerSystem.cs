@@ -8,11 +8,12 @@ using Leopotam.EcsLite.Di;
         {
             var world = systems.GetWorld();
 
-            var poolUnitType = world.GetPool<UnitTypeComponent>();
+            var poolUnitType = world.GetPool<ViewComponent>();
             var poolHealth = world.GetPool<HealthComponent>();
             var poolTeamNumber = world.GetPool<TeamComponent>();
             var poolMove = world.GetPool<MoveComponent>();
             var poolDamage = world.GetPool<DamageComponent>();
+            var poolShoot = world.GetPool<ShootComponent>();
 
             const int armyCount = 2; 
             var entitiesPerArmy = _unitData.Value.CountSpawnInRow * _unitData.Value.Row; 
@@ -22,10 +23,11 @@ using Leopotam.EcsLite.Di;
                 var entity = world.NewEntity();
                 
                 poolUnitType.Add(entity);
-                poolMove.Add(entity);
-                poolDamage.Add(entity);
                 poolHealth.Add(entity);
                 poolTeamNumber.Add(entity);
+                poolMove.Add(entity);
+                poolDamage.Add(entity);
+                poolShoot.Add(entity);
             }
         }
     }

@@ -7,7 +7,7 @@ struct ShootInitSystem : IEcsInitSystem
     private readonly EcsCustomInject<UnitData> _unitData;
     private readonly EcsCustomInject<BulletData> _bulletData;
     
-    private readonly EcsFilterInject<Inc<TeamComponent, UnitTypeComponent, ShootComponent>> _ecsFilterArmyUnitType;
+    private readonly EcsFilterInject<Inc<TeamComponent, ViewComponent, ShootComponent>> _ecsFilterArmyUnitType;
     public void Init(IEcsSystems systems)
     {
         foreach (var entityIndex in _ecsFilterArmyUnitType.Value)
@@ -28,10 +28,10 @@ struct ShootInitSystem : IEcsInitSystem
         }
     }
 
-    private void SetShootCompEntity(ref ShootComponent poolShoot, ref UnitTypeComponent unit, ECSMonoObject bullet)
+    private void SetShootCompEntity(ref ShootComponent poolShoot, ref ViewComponent unit, ECSMonoObject bullet)
     {
-        poolShoot.Spawn = unit.View.transform;
-        poolShoot.Bullet = bullet;
+        /*poolShoot.Spawn = unit.View.transform;
+        poolShoot.Bullet = bullet;*/
     }
 
 

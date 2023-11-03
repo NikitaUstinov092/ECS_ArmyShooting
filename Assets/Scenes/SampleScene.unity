@@ -495,7 +495,7 @@ MonoBehaviour:
     Row: 10
     StartHealth: 5
     ShotDistance: 3000
-    Speed: 0
+    Speed: 1
     Damage: 0
     RedFighter: {fileID: 5356859172381228147, guid: 6bad952d8a4bf334c9006c8316e62d4c, type: 3}
     BlueFighter: {fileID: 4421204442452950294, guid: 63ea1e1cdab886b489a14bb8da4b964d, type: 3}
