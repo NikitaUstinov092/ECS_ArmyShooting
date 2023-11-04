@@ -1,6 +1,6 @@
 using UnityEngine;
 
-    struct ViewComponent
+    public struct ViewComponent
     {
         public GameObject View;
     }

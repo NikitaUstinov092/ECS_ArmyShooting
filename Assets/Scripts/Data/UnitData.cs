@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class UnitData
@@ -11,8 +12,8 @@ public class UnitData
     public float Speed; 
     public float Damage; 
 
-    public ECSMonoObject RedFighter;
-    public ECSMonoObject BlueFighter;
+    [FormerlySerializedAs("RedFighter")] public ECSMonoObject RedUnit;
+    [FormerlySerializedAs("BlueFighter")] public ECSMonoObject BlueUnit;
     
     public Transform RedTeamStartPoint;
     public Transform BlueTeamStartPoint;

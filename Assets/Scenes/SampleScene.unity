@@ -494,17 +494,19 @@ MonoBehaviour:
     CountSpawnInRow: 10
     Row: 10
     StartHealth: 5
-    ShotDistance: 3000
-    Speed: 1
+    ShotDistance: 1500
+    Speed: 2
     Damage: 0
-    RedFighter: {fileID: 5356859172381228147, guid: 6bad952d8a4bf334c9006c8316e62d4c, type: 3}
-    BlueFighter: {fileID: 4421204442452950294, guid: 63ea1e1cdab886b489a14bb8da4b964d, type: 3}
+    RedUnit: {fileID: 5356859172381228147, guid: 6bad952d8a4bf334c9006c8316e62d4c, type: 3}
+    BlueUnit: {fileID: 4421204442452950294, guid: 63ea1e1cdab886b489a14bb8da4b964d, type: 3}
     RedTeamStartPoint: {fileID: 504743592}
     BlueTeamStartPoint: {fileID: 238504859}
   _bulletData:
-    BulletBlue: {fileID: 9121822432307462848, guid: 19cff2dffeeb2a74f994d87b2d2358d1, type: 3}
-    BulletRed: {fileID: -8095012723593171020, guid: 098be4d84d8dad441bfb090a45f17c1e, type: 3}
-    Speed: 0
+    BulletBlue: {fileID: 7084222716284607929, guid: 19cff2dffeeb2a74f994d87b2d2358d1, type: 3}
+    BulletRed: {fileID: -3301406445158595387, guid: 098be4d84d8dad441bfb090a45f17c1e, type: 3}
+    Speed: 10
+    Health: 1
+    Damage: 1
 --- !u!4 &1547043280
 Transform:
   m_ObjectHideFlags: 0
@@ -519,62 +521,4 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1649172908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1649172912}
-  - component: {fileID: 1649172910}
-  - component: {fileID: 1649172909}
-  m_Layer: 0
-  m_Name: TriggerCleaner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1649172909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649172908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ff7d62e97e85e1479d5c4be5bb5e741, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1649172910
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649172908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &1649172912
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649172908}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.163256, y: 5.6, z: 12.8}
-  m_LocalScale: {x: 200, y: 30, z: 200}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

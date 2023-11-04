@@ -18,9 +18,8 @@ namespace Systems.Unit
                 ref var unitType = ref _ecsFilter.Pools.Inc1.Get(entityIndex);
                 ref var health = ref _ecsFilter.Pools.Inc2.Get(entityIndex);
                 ref var unitTeam = ref _ecsFilter.Pools.Inc3.Get(entityIndex);
-                ref var damage = ref _ecsFilter.Pools.Inc6.Get(entityIndex);
-                
                 ref var move = ref _ecsFilter.Pools.Inc4.Get(entityIndex);
+                ref var damage = ref _ecsFilter.Pools.Inc6.Get(entityIndex);
                 
                 SetView(ref unitType, ref unitTeam, ref unitData);
                 SetMoveVector(ref unitTeam, ref move, ref unitData);
@@ -30,23 +29,23 @@ namespace Systems.Unit
             }
         }
         
-        private void SetView(ref ViewComponent view,ref TeamComponent team,ref UnitData data)
+        private void SetView(ref ViewComponent view, ref TeamComponent team, ref UnitData data)
         {
             view.View = team.TeamType switch
             {
-                1 => data.RedFighter.gameObject,
-                2 => data.BlueFighter.gameObject,
+                1 => data.RedUnit.gameObject,
+                2 => data.BlueUnit.gameObject,
                 _ => view.View
             };
         }
 
-        private void SetMoveVector(ref TeamComponent team,ref MoveComponent move, ref UnitData data)
+        private void SetMoveVector(ref TeamComponent team, ref MoveComponent move, ref UnitData data)
         {
             move.Speed = data.Speed;
             move.Direction = team.TeamType switch
             {
-                1 => Vector3.forward,
-                2 => -Vector3.forward,
+                1 => -Vector3.forward,
+                2 => Vector3.forward,
                 _ => move.Direction
             };
         }

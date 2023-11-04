@@ -1,9 +1,10 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-    public struct UnitEntityInitialazerSystem : IEcsInitSystem
+using UnityEngine;
+
+public struct UnitEntityInitialazerSystem : IEcsInitSystem
     {
         private readonly EcsCustomInject<UnitData> _unitData;
-        
         public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
@@ -14,7 +15,7 @@ using Leopotam.EcsLite.Di;
             var poolMove = world.GetPool<MoveComponent>();
             var poolDamage = world.GetPool<DamageComponent>();
             var poolShoot = world.GetPool<ShootComponent>();
-
+           
             const int armyCount = 2; 
             var entitiesPerArmy = _unitData.Value.CountSpawnInRow * _unitData.Value.Row; 
 

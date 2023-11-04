@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Systems.Bullet;
 using Systems.Unit;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -21,17 +22,25 @@ public sealed class EcsStartup : MonoBehaviour
             _world = new EcsWorld ();
             _systems = new EcsSystems (_world);
             _systems
-                // register your systems here, for example:
                  .Add (new UnitEntityInitialazerSystem())
                  .Add (new UnitTeamSelectorSystem())
                  .Add (new UnitComponentSettingSystem())
-                 .Add (new UnitSpawnSystem())
+                 .Add (new UnitTeamSpawnSystem())
+                 .Add (new UnitShootComponentSettingSystem())
                  .Add (new MoveSystem())
-                // .Add(new ShootInitSystem())
+                 .Add (new UnitCheckShootDistanceSystem())
+                 .Add (new BulletEntityFactorySystem())
+                 .Add (new BulletComponentSettingSystem())
+                 .Add (new BulletSpawnSystem())
+                 .Add (new UnitShootCoolDownSystem())
+            
+                
+                
+                 // .Add(new ShootInitSystem())
                  //.Add(new ShootRunSystem())
                 //.Add(new ShootCountDownSystem())            
-                 .Add(new DamageSystem())
-                 .Add(new DestroySystem())
+               //  .Add(new DamageSystem())
+              //   .Add(new DestroySystem())
 
                 // .Add (new TestSystem2 ())
 

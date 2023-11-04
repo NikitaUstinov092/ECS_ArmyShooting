@@ -7,26 +7,26 @@ using UnityEngine;
         private readonly EcsFilterInject<Inc<ShootCountDownComponent>> _shootCountDownPool;
         public void Run(IEcsSystems systems)
         {
-            foreach (var entityIndex in _shootCountDownPool.Value)
+            /*foreach (var entityIndex in _shootCountDownPool.Value)
             {
                 if (!_shootCountDownPool.Pools.Inc1.Has(entityIndex))
                     continue;
                 
                 ref var shootCountDownPoolComp = ref _shootCountDownPool.Pools.Inc1.Get(entityIndex);
 
-                if (shootCountDownPoolComp.ShootWaiting) 
+                if (shootCountDownPoolComp.CoolDown) 
                     continue;
                 
-                shootCountDownPoolComp.ShootWaiting = true;
+                shootCountDownPoolComp.CoolDown = true;
                 DeleteComponent(entityIndex, shootCountDownPoolComp);
-            }
+            }*/
         }
 
         private async void DeleteComponent(int entityIndex, ShootCountDownComponent comp)
         {
-            await Task.Delay(GetRandomTime());
+            /*await Task.Delay(GetRandomTime());
             _shootCountDownPool.Pools.Inc1.Del(entityIndex);
-            comp.ShootWaiting = false;
+            comp.CoolDown = false;*/
         }
 
         private int GetRandomTime()
