@@ -1,4 +1,4 @@
 ﻿struct HealthComponent 
 {
-    public int Health;
+    public float Health;
 }

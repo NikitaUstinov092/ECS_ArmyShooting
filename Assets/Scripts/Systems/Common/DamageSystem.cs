@@ -4,41 +4,32 @@ using UnityEngine;
 
 internal struct DamageSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<HitComponent>> _filterHits;
-        private readonly EcsPoolInject<HitComponent> _poolHits;
-        private readonly EcsPoolInject<HealthComponent> _poolHealth;
-        private readonly EcsWorldInject _world;
-       
-        private const int Damage = 1; 
-        public void Run(IEcsSystems systems)
-        {
-            foreach (var entity in _filterHits.Value)
+            private readonly EcsFilterInject<Inc<HitComponent>> _filterHits;
+            private readonly EcsPoolInject<HitComponent> _poolHits;
+            private readonly EcsPoolInject<DamageComponent> _poolDamage;
+            private readonly EcsPoolInject<TeamComponent> _poolTeam;
+            private readonly EcsPoolInject<HealthComponent> _poolHealth;
+            private readonly EcsWorldInject _world;
+            public void Run(IEcsSystems systems)
             {
-                ref HitComponent hitC = ref _poolHits.Value.Get(entity);
+                foreach(var entity in _filterHits.Value)
+                {
+                    ref HitComponent hitC = ref _poolHits.Value.Get(entity);
+                    
+                    (int, int) entitiesCollide =
+                        PackerEntityUtils.UnpackEntities(_world.Value, hitC.FirstCollider.EcsPacked, hitC.SecondCollider.EcsPacked);
+                    
+                    ref TeamComponent firstCollideTeam = ref _poolTeam.Value.Get(entitiesCollide.Item1);
+                    ref TeamComponent secondCollideTeam = ref _poolTeam.Value.Get(entitiesCollide.Item2);
+                    
+                    ref HealthComponent healthC = ref _poolHealth.Value.Get(entitiesCollide.Item1);
+                    ref DamageComponent damageC = ref _poolDamage.Value.Get(entitiesCollide.Item2);
 
-                if (hitC.FirstCollider == null)
-                   continue;
-
-                if (hitC.SecondCollider == null)
-                   continue;
-
-                if (hitC.FirstCollider.CompareTag(hitC.SecondCollider.tag))
-                   continue;
-
-                if (hitC.FirstCollider.GetComponent<BulletHitColider>()!=null 
-                   && hitC.SecondCollider.GetComponent<BulletHitColider>() != null)
-                   continue;
-
-                int fighterEntity = PackerEntityUtils.UnpackEntities(_world.Value, hitC.SecondCollider.EcsPacked);
-            
-                ref HealthComponent healthC = ref _poolHealth.Value.Get(fighterEntity);
-
-                healthC.Health -= Damage;
-
-                Object.DestroyImmediate(hitC.FirstCollider.gameObject);
-                
-                /*_poolHits.Value.Del(entity);*/
-                _world.Value.DelEntity(entity);
+                    if (firstCollideTeam.TeamType != secondCollideTeam.TeamType)
+                    {
+                        healthC.Health -= damageC.Damage;
+                    }
+                    _world.Value.DelEntity(entity);
+                }
             }
-        }
     }

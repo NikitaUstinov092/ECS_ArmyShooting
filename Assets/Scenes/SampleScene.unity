@@ -493,10 +493,10 @@ MonoBehaviour:
   _unitData:
     CountSpawnInRow: 10
     Row: 10
-    StartHealth: 5
+    StartHealth: 1
     ShotDistance: 1500
     Speed: 2
-    Damage: 0
+    Damage: 100
     RedUnit: {fileID: 5356859172381228147, guid: 6bad952d8a4bf334c9006c8316e62d4c, type: 3}
     BlueUnit: {fileID: 4421204442452950294, guid: 63ea1e1cdab886b489a14bb8da4b964d, type: 3}
     RedTeamStartPoint: {fileID: 504743592}
@@ -507,6 +507,7 @@ MonoBehaviour:
     Speed: 10
     Health: 1
     Damage: 1
+    DestroyDelay: 5
 --- !u!4 &1547043280
 Transform:
   m_ObjectHideFlags: 0

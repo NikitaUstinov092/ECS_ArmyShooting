@@ -9,7 +9,7 @@ public struct UnitEntityInitialazerSystem : IEcsInitSystem
         {
             var world = systems.GetWorld();
 
-            var poolUnitType = world.GetPool<ViewComponent>();
+            var poolUnitType = world.GetPool<ViewComponent>(); //TO DO Заенжектить
             var poolHealth = world.GetPool<HealthComponent>();
             var poolTeamNumber = world.GetPool<TeamComponent>();
             var poolMove = world.GetPool<MoveComponent>();

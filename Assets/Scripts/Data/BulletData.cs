@@ -7,8 +7,10 @@ namespace Views
     {
         public ECSMonoObject BulletBlue;
         public ECSMonoObject BulletRed;
+       
         public float Speed; 
         public int Health;
         public float Damage;
+        public float DestroyDelay;
     }
 }

@@ -2,10 +2,9 @@
 
 namespace Components
 {
-    public struct BulletComponent
+    public struct BulletSpawnComponent
     {
         public Transform SpawnTransform;
         public ECSMonoObject Bullet;
-        public bool Spawned;
     }
 }
