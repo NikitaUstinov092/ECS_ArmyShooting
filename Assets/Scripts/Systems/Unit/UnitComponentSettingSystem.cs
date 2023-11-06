@@ -6,26 +6,26 @@ namespace Systems.Unit
 {
     public struct UnitComponentSettingSystem: IEcsInitSystem
     {
-        private readonly EcsFilterInject<Inc< ViewComponent, HealthComponent, TeamComponent, MoveComponent, ShootComponent, DamageComponent>> _ecsFilter;
+        private readonly EcsFilterInject<Inc< ViewComponent, HealthComponent, TeamComponent, MoveComponent, ShootComponent, DamageComponent>> _unitFilter;
         private readonly EcsCustomInject<UnitData> _unitData;
         
         public void Init(IEcsSystems systems)
         {
             var unitData = _unitData.Value;
             
-            foreach (var entityIndex in _ecsFilter.Value)
+            foreach (var entityIndex in _unitFilter.Value)
             {
-                ref var unitType = ref _ecsFilter.Pools.Inc1.Get(entityIndex);
-                ref var health = ref _ecsFilter.Pools.Inc2.Get(entityIndex);
-                ref var unitTeam = ref _ecsFilter.Pools.Inc3.Get(entityIndex);
-                ref var move = ref _ecsFilter.Pools.Inc4.Get(entityIndex);
-                ref var damage = ref _ecsFilter.Pools.Inc6.Get(entityIndex);
+                ref var unitTypeComp = ref _unitFilter.Pools.Inc1.Get(entityIndex);
+                ref var healthComp = ref _unitFilter.Pools.Inc2.Get(entityIndex);
+                ref var unitTeamComp = ref _unitFilter.Pools.Inc3.Get(entityIndex);
+                ref var moveComp = ref _unitFilter.Pools.Inc4.Get(entityIndex);
+                ref var damageComp = ref _unitFilter.Pools.Inc6.Get(entityIndex);
                 
-                SetView(ref unitType, ref unitTeam, ref unitData);
-                SetMoveVector(ref unitTeam, ref move, ref unitData);
+                SetView(ref unitTypeComp, ref unitTeamComp, ref unitData);
+                SetMoveVector(ref unitTeamComp, ref moveComp, ref unitData);
                 
-                health.Health = unitData.StartHealth;
-                damage.Damage = unitData.Damage;
+                healthComp.Health = unitData.StartHealth;
+                damageComp.Damage = unitData.Damage;
             }
         }
         

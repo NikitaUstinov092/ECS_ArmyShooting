@@ -14,13 +14,13 @@ namespace Systems.Bullet
         {
             foreach (var entity in _filterBullet.Value)
             {
-                ref var bulletDestroyDelay = ref _filterBullet.Pools.Inc1.Get(entity);
-                ref var health = ref _filterBullet.Pools.Inc2.Get(entity);
+                ref var bulletDestroyDelayComp = ref _filterBullet.Pools.Inc1.Get(entity);
+                ref var healthComp = ref _filterBullet.Pools.Inc2.Get(entity);
 
-                bulletDestroyDelay.Delay -= Time.deltaTime;
+                bulletDestroyDelayComp.Delay -= Time.deltaTime;
 
-                if (bulletDestroyDelay.Delay <= 0)
-                    health.Health = 0;
+                if (bulletDestroyDelayComp.Delay <= 0)
+                    healthComp.Health = 0;
             }
            
         }

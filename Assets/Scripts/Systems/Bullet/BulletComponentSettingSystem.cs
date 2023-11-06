@@ -17,19 +17,19 @@ namespace Systems.Bullet
             { 
                 var data = _bulletData.Value;
                 
-                ref var health = ref _filterBullet.Pools.Inc1.Get(entity);
-                ref var team = ref _filterBullet.Pools.Inc2.Get(entity);
-                ref var damage = ref _filterBullet.Pools.Inc3.Get(entity);
-                ref var bullet = ref _filterBullet.Pools.Inc4.Get(entity);
-                ref var move = ref _filterBullet.Pools.Inc5.Get(entity);
-                ref var destroyDelay = ref _filterBullet.Pools.Inc6.Get(entity);
+                ref var healthComp = ref _filterBullet.Pools.Inc1.Get(entity);
+                ref var teamComp = ref _filterBullet.Pools.Inc2.Get(entity);
+                ref var damageComp = ref _filterBullet.Pools.Inc3.Get(entity);
+                ref var bulletComp = ref _filterBullet.Pools.Inc4.Get(entity);
+                ref var moveComp = ref _filterBullet.Pools.Inc5.Get(entity);
+                ref var destroyDelayComp = ref _filterBullet.Pools.Inc6.Get(entity);
 
-                health.Health = data.Health;
-                damage.Damage = data.Damage;
-                destroyDelay.Delay = data.DestroyDelay;
+                healthComp.Health = data.Health;
+                damageComp.Damage = data.Damage;
+                destroyDelayComp.Delay = data.DestroyDelay;
                
-                SetBulletSpawnView(ref bullet, ref team, ref data);
-                SetMoveComp(ref move, ref team, ref data);
+                SetBulletSpawnView(ref bulletComp, ref teamComp, ref data);
+                SetMove(ref moveComp, ref teamComp, ref data);
             }
         }
         
@@ -42,7 +42,7 @@ namespace Systems.Bullet
             };
         }
         
-        private void SetMoveComp(ref MoveComponent move, ref TeamComponent team,  ref BulletData data)
+        private void SetMove(ref MoveComponent move, ref TeamComponent team,  ref BulletData data)
         {
             move.Speed = data.Speed;
             move.Direction = team.TeamType switch

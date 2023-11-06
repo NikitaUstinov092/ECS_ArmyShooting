@@ -4,31 +4,31 @@ using UnityEngine;
 
 public struct UnitEntityInitialazerSystem : IEcsInitSystem
     {
+        private readonly EcsPoolInject<ViewComponent> _poolUnitType;
+        private readonly EcsPoolInject<HealthComponent> _poolHealth;
+        private readonly EcsPoolInject<TeamComponent> _poolTeamNumber;
+        private readonly EcsPoolInject<MoveComponent> _poolMove;
+        private readonly EcsPoolInject<DamageComponent> _poolDamage;
+        private readonly EcsPoolInject<ShootComponent> _poolShoot;
+        
         private readonly EcsCustomInject<UnitData> _unitData;
         public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
-
-            var poolUnitType = world.GetPool<ViewComponent>(); //TO DO Заенжектить
-            var poolHealth = world.GetPool<HealthComponent>();
-            var poolTeamNumber = world.GetPool<TeamComponent>();
-            var poolMove = world.GetPool<MoveComponent>();
-            var poolDamage = world.GetPool<DamageComponent>();
-            var poolShoot = world.GetPool<ShootComponent>();
            
             const int armyCount = 2; 
-            var entitiesPerArmy = _unitData.Value.CountSpawnInRow * _unitData.Value.Row; 
+            var unitsPerArmy = _unitData.Value.CountSpawnInRow * _unitData.Value.Row; 
 
-            for (var i = 0; i < entitiesPerArmy * armyCount; i++)
+            for (var i = 0; i < unitsPerArmy * armyCount; i++)
             {
                 var entity = world.NewEntity();
                 
-                poolUnitType.Add(entity);
-                poolHealth.Add(entity);
-                poolTeamNumber.Add(entity);
-                poolMove.Add(entity);
-                poolDamage.Add(entity);
-                poolShoot.Add(entity);
+                _poolUnitType.Value.Add(entity);
+                _poolHealth.Value.Add(entity);
+                _poolTeamNumber.Value.Add(entity);
+                _poolMove.Value.Add(entity);
+                _poolDamage.Value.Add(entity);
+                _poolShoot.Value.Add(entity);
             }
         }
     }

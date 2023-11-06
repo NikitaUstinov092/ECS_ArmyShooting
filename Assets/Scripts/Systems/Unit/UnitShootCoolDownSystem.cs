@@ -12,10 +12,10 @@ namespace Systems.Unit
         {
             foreach (var entity in _filterShootCountDown.Value)
             {
-                ref var shootCountDown = ref _filterShootCountDown.Pools.Inc1.Get(entity).CoolDawnDelay;
-                shootCountDown -= Time.deltaTime;
+                ref var shootCountDownComp = ref _filterShootCountDown.Pools.Inc1.Get(entity).CoolDawnDelay;
+                shootCountDownComp -= Time.deltaTime;
 
-                if (shootCountDown <= 0)
+                if (shootCountDownComp <= 0)
                 {
                     _poolShootCountDown.Value.Del(entity);
                 }

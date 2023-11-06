@@ -13,12 +13,13 @@ using UnityEngine;
         {
             foreach (var entity in _filterHealth.Value)
             {
-                ref var viewC = ref _poolView.Value.Get(entity);
-                var healthC = _poolHealth.Value.Get(entity);
+                ref var viewComp = ref _poolView.Value.Get(entity);
+                var healthComp = _poolHealth.Value.Get(entity);
 
-                if (healthC.Health > 0)
+                if (healthComp.Health > 0)
                     continue;
-                Object.DestroyImmediate(viewC.View);
+                
+                Object.DestroyImmediate(viewComp.View);
                 _world.Value.DelEntity(entity);
             }
         }
